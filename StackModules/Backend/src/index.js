@@ -4,9 +4,10 @@ require('dotenv').config();
 const app = require('./nodeApp');
 require('./database');
 
-async function main(){
-    await app.listen(4500);
-    console.log('server 4500');
+async function main() {
+    //await app.listen(app.get('port'));
+    await app.listen(5000);
+    console.log('Server on port', app.get('port'));
 }
 
 main();
