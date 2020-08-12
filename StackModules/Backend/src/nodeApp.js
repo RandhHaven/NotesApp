@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 //routes
-app.get('/api/users', (req, res) => res.send('rest users company'));
-app.get('/api/notes', (req, res) => res.send('rest notes'));
+app.use('/api/users', require('./routes/UserRouter'));
+app.use('/api/notes', require('./routes/NotesRouter'));
 
 module.exports = app;
