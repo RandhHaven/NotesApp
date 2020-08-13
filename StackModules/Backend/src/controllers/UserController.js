@@ -1,9 +1,31 @@
-
 const usersController = {};
 
-usersController.getUsers = (req,res) => res.json({message: [], transaccionId: '0'});
-usersController.updateUser = (req,res) => res.json({message:'Update User'});
-usersController.deleteUser = (req,res) => res.json({message: 'Delete User'});
-usersController.createUser = (req,res) => res.json({message: 'Update User'});
+var UserModel = require('../modules/UserModule');
+
+usersController.getUsers = async (req,res) => {
+    var user = await UserModel.find();
+    res.json(user);
+}
+
+usersController.createUser = async (req,res) => {
+    const { userName, name, lastName, phoneNumber } = req.body;
+    const newUser = new UserModel({
+        userName: userName,
+        name: name,
+        lastName: lastName,
+        phoneNumber: phoneNumber
+    });
+    await newUser.save();
+    res.json(newUser);
+}
+
+usersController.updateUser = (req,res) => { 
+    res.json({message:'Update User'});
+}
+
+usersController.deleteUser = async (req,res) => { 
+    const delUser = await NoteModel.findByIdAndDelete(req.params.id);
+    res.json(delUser);
+}
 
 module.exports = usersController;

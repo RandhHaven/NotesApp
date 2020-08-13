@@ -15,4 +15,4 @@ var userSchema = new Schema({
     timestamps: true
 });
 
-model('UserSchema', userSchema);
+module.exports = model('UserSchema', userSchema);
