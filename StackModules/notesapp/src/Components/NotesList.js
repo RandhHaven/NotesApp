@@ -4,7 +4,7 @@ export default class NotesList extends Component {
     render() {
         return (
             <div>
-                Notes List
+                Notes List                
             </div>
         )
     }
