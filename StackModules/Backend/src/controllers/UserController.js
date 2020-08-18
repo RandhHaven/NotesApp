@@ -8,12 +8,13 @@ usersController.getUsers = async (req,res) => {
 }
 
 usersController.createUser = async (req,res) => {
-    const { userName, name, lastName, phoneNumber } = req.body;
+    const { userName, name, lastName, phoneNumber, mail } = req.body;
     const newUser = new UserModel({
         userName: userName,
         name: name,
         lastName: lastName,
-        phoneNumber: phoneNumber
+        phoneNumber: phoneNumber,
+        mail: mail
     });
     await newUser.save();
     res.json(newUser);

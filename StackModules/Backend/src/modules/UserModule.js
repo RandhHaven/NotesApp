@@ -10,7 +10,8 @@ var userSchema = new Schema({
     },
     name: String,
     lastName: String,
-    phoneNumber: String
+    phoneNumber: String,
+    mail: String
 },{
     timestamps: true
 });
