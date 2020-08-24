@@ -20,12 +20,20 @@ usersController.createUser = async (req,res) => {
     res.json(newUser);
 }
 
-usersController.updateUser = (req,res) => { 
-    res.json({message:'Update User'});
+usersController.updateUser = (req,res) => {
+    const { userName, name, lastName, phoneNumber, mail } = req.body;
+    const updateNote = await UserModel.findByIdAndUpdate(req.params.id, {
+        userName: userName,
+        name: name,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        mail: mail
+    });
+    res.json(updateNote);
 }
 
-usersController.deleteUser = async (req,res) => { 
-    const delUser = await NoteModel.findByIdAndDelete(req.params.id);
+usersController.deleteUser = async (req,res) => {     
+    const delUser = await UserModel.findByIdAndDelete(req.params.id);
     res.json(delUser);
 }
 

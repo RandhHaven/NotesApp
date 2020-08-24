@@ -3,32 +3,48 @@ import axios from 'axios';
 
 export default class CreateUser extends Component {
 
-    state= {
+    state = {
         dbUsers:[],
         userName: '',
         name: '',        
-        lastname: '',
+        lastName: '',
         phoneNumber: '',
         mail: ''
     }
 
-    async componentDidMount(){
+    getUsers = async () => {
         const resUser = await axios.get('http://localhost:5000/api/users')
         this.setState({ dbUsers: resUser.data });
+    }
+
+    async componentDidMount(){
+        this.getUsers();
         console.log(this.state.dbUsers);
+    }
+
+    filtersClean(){
+        this.setState({
+            userName: '',
+            user: '',
+            lastName: '',
+            mail:'',
+            phoneNumber: ''
+        })
     }
     
     onSubmit = async (event) => {
-        console.log('PRUEBA TEST');
+        event.preventDefault();
         const resUser = await axios.post('http://localhost:5000/api/users', {
             userName: this.state.userName,
             name: this.state.name,
-            lastname: this.state.lastname,
+            lastName: this.state.lastName,
             phoneNumber: this.state.phoneNumber,
             mail: this.state.mail
         });
+        this.getUsers();
+        this.filtersClean();
         console.log(resUser.data);
-        event.preventDefault();        
+                  
     }
 
     onChange = (event) => {
@@ -37,7 +53,53 @@ export default class CreateUser extends Component {
         });
     }
 
+    onDeleteUser = async (userId) =>{        
+        console.log(userId);
+        await axios.delete('http://localhost:5000/api/users/' + userId);
+        this.getUsers();
+    }
+
+    onUpdateUser = () =>{
+
+    }
+
     render() {
+        const usersList = this.state.dbUsers.map((user, i) =>{
+            return (
+              <div className="container">
+                <li className="list-group-item" key={user._id}>
+                    <div className="row col-md-12">
+                        <div className="row col-md-12">
+                            <div className="col-md-3">
+                                {user.userName} 
+                            </div>
+                            <div className="col-md-2">
+                                {user.name} 
+                            </div>
+                            <div className="col-md-2">
+                                {user.lastName} 
+                            </div>
+                            <div className="col-md-2">
+                                {user.phoneNumber} 
+                            </div>
+                            <div className="col-md-3">
+                                {user.mail} 
+                            </div>                            
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6">
+                                <button className="btn btn-primary center-block" type="button" onClick={() => this.onUpdateUser(user._id)}>Edit</button>
+                            </div>
+                            <div className="col-md-6">
+                                <button className="btn btn-danger center-block" type="button" onClick={() => this.onDeleteUser(user._id)}>Delete</button>  
+                            </div>
+                        </div>
+                    </div>
+                </li>
+              </div>)
+            }
+        )
+
         return (
             <div className="row col-md-12">
                 <div className="col-md-4">
@@ -66,7 +128,7 @@ export default class CreateUser extends Component {
                                 <label> Last Name: </label>
                             </div>
                             <div className="col-md-8">
-                                <input name="lastname" type="text" className="form-control" value={this.state.lastname} onChange={this.onChange} />
+                                <input name="lastName" type="text" className="form-control" value={this.state.lastName} onChange={this.onChange} />
                             </div>
                         </div>
                         <div className="row pt-2">
@@ -93,16 +155,19 @@ export default class CreateUser extends Component {
                             <div className="col-md-4" />                                   
                         </div>
                     </form>
-                 </div>
+                </div>
                 <div className="col-md-8">
-                    <ul className="list-group">
-                        {
-                            this.state.dbUsers.map(user => {
-                                return <li className="list-group-item" key={user._id}>{user.userName} - {user.phoneNumber} </li>
-                              })
-                        }
-                    </ul>
-                 </div>
+                    <div className="container">                        
+                        <div className="card-header ">
+                            <h4> Users </h4>
+                        </div>
+                        <ul className="list-group">
+                            <li className="list-group-item">
+                                { usersList }                                
+                            </li>
+                        </ul>
+                    </div>                   
+                </div>
             </div>           
         )
     }
