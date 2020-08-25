@@ -33,11 +33,11 @@ notesController.updateNotes = async (req,res) => {
 notesController.deleteNotes = async (req,res) => { 
     const delNote = await NoteModel.findByIdAndDelete(req.params.id);
     res.json(delNote);
-}
+};
 
 notesController.getNote = async (req,res) => {
     const newNote = await NoteModel.findById(req.params.id);
     res.json(newNote);
-}
+};
 
 module.exports = notesController;

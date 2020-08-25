@@ -20,7 +20,7 @@ usersController.createUser = async (req,res) => {
     res.json(newUser);
 }
 
-usersController.updateUser = (req,res) => {
+usersController.updateUser = async (req,res) => {
     const { userName, name, lastName, phoneNumber, mail } = req.body;
     const updateNote = await UserModel.findByIdAndUpdate(req.params.id, {
         userName: userName,
