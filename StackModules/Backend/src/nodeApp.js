@@ -1,3 +1,4 @@
+//Importo Modulo express
 const express = require('express'); 
 
 //Importo Modulo cors
@@ -15,9 +16,9 @@ app.use(bodyParser.json())
 
 console.log('LOG PROCESS MONGODB_URI', process.env.MONGODB_URI);
 console.log('LOG PROCESS PORT', process.env.PORT);
+
 //settings
 app.set('port', process.env.PORT || 4000);
-
 
 //middlewares
 app.use(cors());

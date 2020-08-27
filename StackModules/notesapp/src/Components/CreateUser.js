@@ -13,7 +13,7 @@ export default class CreateUser extends Component {
     }
 
     getUsers = async () => {
-        const resUser = await axios.get('http://localhost:5000/api/users')
+        const resUser = await axios.get('http://localhost:5000/api/users');
         this.setState({ dbUsers: resUser.data });
     }
 
@@ -43,8 +43,7 @@ export default class CreateUser extends Component {
         });
         this.getUsers();
         this.filtersClean();
-        console.log(resUser.data);
-                  
+        console.log(resUser.data);                  
     }
 
     onChange = (event) => {
@@ -70,7 +69,7 @@ export default class CreateUser extends Component {
                 <li className="list-group-item" key={user._id}>
                     <div className="row col-md-12">
                         <div className="row col-md-12">
-                            <div className="col-md-3">
+                            <div className="col-md-3">                                
                                 {user.userName} 
                             </div>
                             <div className="col-md-2">
