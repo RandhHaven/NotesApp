@@ -15,14 +15,14 @@ export default class CreateUser extends Component {
     }
 
     getUsers = async () => {
+        console.log(process.env.PORT);
         const resUser = await axios.get('http://localhost:5000/api/users');
         this.setState({ dbUsers: resUser.data });
-        console.log(this.state.dbUsers);
+        console.log(resUser.data);
     }
 
     async componentDidMount(){
-        this.getUsers();
-        console.log(this.state.dbUsers);
+        this.getUsers();        
     }
 
     filtersClean(){

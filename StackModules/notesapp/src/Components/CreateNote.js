@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+require('dotenv').config();
 
 export default class CreateNote extends Component {
 
@@ -26,9 +27,7 @@ export default class CreateNote extends Component {
     getUsers = async () => {
         const restUser = await axios.get('http://localhost:5000/api/users');
         console.log('db user create note');
-        console.log(restUser.data);
-        //this.setState({ dbUsers: resUser.data });
-        
+        console.log(restUser.data);        
         if (restUser.data.length > 0) {
             this.setState({
                 dbUsers: restUser.data.map(user => user.userName),
