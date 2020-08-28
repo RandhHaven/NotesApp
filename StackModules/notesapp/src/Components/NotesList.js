@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { format, render, cancel, register } from 'timeago.js';
+import { format } from 'timeago.js';
 
 export default class NotesList extends Component {
 
@@ -13,7 +13,7 @@ export default class NotesList extends Component {
     }
 
     getNotes = async () => {
-        const restNotes = await axios.get('https://notesappmodules.herokuapp.com/api/notes')
+        const restNotes = await axios.get('http://localhost:5000/api/notes')
         this.setState({ dbNotes: restNotes.data });
     }
 
@@ -23,7 +23,7 @@ export default class NotesList extends Component {
     
     onDeleteNote = async (noteId) =>{        
         console.log(noteId);
-        await axios.delete('https://notesappmodules.herokuapp.com/api/notes/' + noteId);
+        await axios.delete('http://localhost:5000/api/notes/' + noteId);
         this.getNotes();
     }
 
@@ -42,12 +42,11 @@ export default class NotesList extends Component {
                             <div className="col-md-8">
                                 {note.author} 
                             </div>
-
-                        </div>
-                        <div className="card-footer">
                             <div className="col-md-6">
-                                {note.fecha} 
+                                {format(note.date)} 
                             </div>
+                        </div>
+                        <div className="card-footer">                            
                             <div className="col-md-6">
                                 <button className="btn btn-danger center-block" type="button" onClick={() => this.onDeleteNote(note._id)}>Delete</button>  
                             </div>
