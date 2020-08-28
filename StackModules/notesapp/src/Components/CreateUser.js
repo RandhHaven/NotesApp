@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-//Importo Modulo doteenv
-require('dotenv').config();
 
 export default class CreateUser extends Component {
 

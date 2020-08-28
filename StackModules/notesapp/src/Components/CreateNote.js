@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-require('dotenv').config();
 
 export default class CreateNote extends Component {
 
