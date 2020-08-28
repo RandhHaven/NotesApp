@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <Navbar/>
-      <div className="container p-2">
+      <div className="container">
         <Route path='/' exact component = { NotesList }  />
         <Route path='/edit/:id' component = { CreateNote } />
         <Route path='/create' component = { CreateNote } />
