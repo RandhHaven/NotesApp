@@ -24,20 +24,20 @@ export default class CreateNote extends Component {
     }
 
     getUsers = async () => {
-        const restUser = await axios.get('http://localhost:5000/api/users');        
-        console.log('PRUEBA REST12:' || restUser.data);
+        const restUser = await axios.get('http://localhost:5000/api/users');
+        console.log('db user create note');
+        console.log(restUser.data);
+        //this.setState({ dbUsers: resUser.data });
+        
         if (restUser.data.length > 0) {
             this.setState({
-                dbUsers: restUser.data.map(user => user.username),
-                userSelected: restUser.data[0].username
+                dbUsers: restUser.data.map(user => user.userName),
+                userSelected: restUser.data[0].userName
             });
         }
-        console.log('LOG DBUSERS' || this.state.dbUsers);
     }
 
-    async componentDidMount(){
-        const restUser = await axios.get('http://localhost:5000/api/users');        
-        console.log('PRUEBA REST12:' || restUser.data);        
+    async componentDidMount(){   
         this.getUsers();
         console.log(this.state.dbUsers);
     }

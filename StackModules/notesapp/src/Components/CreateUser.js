@@ -15,6 +15,7 @@ export default class CreateUser extends Component {
     getUsers = async () => {
         const resUser = await axios.get('http://localhost:5000/api/users');
         this.setState({ dbUsers: resUser.data });
+        console.log(this.state.dbUsers);
     }
 
     async componentDidMount(){
@@ -59,13 +60,11 @@ export default class CreateUser extends Component {
     }
 
     onUpdateUser = () =>{
-
     }
 
     render() {
         const usersList = this.state.dbUsers.map((user, i) =>{
             return (
-              <div className="container">
                 <li className="list-group-item" key={user._id}>
                     <div className="row col-md-12">
                         <div className="row col-md-12">
@@ -95,7 +94,7 @@ export default class CreateUser extends Component {
                         </div>
                     </div>
                 </li>
-              </div>)
+              )
             }
         )
 
@@ -161,9 +160,7 @@ export default class CreateUser extends Component {
                             <h4> Users </h4>
                         </div>
                         <ul className="list-group">
-                            <li className="list-group-item">
-                                { usersList }                                
-                            </li>
+                            { usersList } 
                         </ul>
                     </div>                   
                 </div>
