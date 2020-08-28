@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+//Importo Modulo doteenv
+require('dotenv').config();
 
 export default class CreateUser extends Component {
 
@@ -13,7 +15,7 @@ export default class CreateUser extends Component {
     }
 
     getUsers = async () => {
-        const resUser = await axios.get('http://localhost:5000/api/users');
+        const resUser = await axios.get('https://notesappmodules.herokuapp.com/api/users');
         this.setState({ dbUsers: resUser.data });
         console.log(this.state.dbUsers);
     }
@@ -35,7 +37,7 @@ export default class CreateUser extends Component {
     
     onSubmit = async (event) => {
         event.preventDefault();
-        const resUser = await axios.post('http://localhost:5000/api/users', {
+        const resUser = await axios.post('https://notesappmodules.herokuapp.com/users', {
             userName: this.state.userName,
             name: this.state.name,
             lastName: this.state.lastName,
@@ -55,7 +57,7 @@ export default class CreateUser extends Component {
 
     onDeleteUser = async (userId) =>{        
         console.log(userId);
-        await axios.delete('http://localhost:5000/api/users/' + userId);
+        await axios.delete('https://notesappmodules.herokuapp.com/api/users/' + userId);
         this.getUsers();
     }
 
