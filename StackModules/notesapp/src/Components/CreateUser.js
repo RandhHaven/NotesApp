@@ -14,7 +14,7 @@ export default class CreateUser extends Component {
 
     getUsers = async () => {
         console.log(process.env.PORT);
-        const resUser = await axios.get('http://localhost:5000/api/users');
+        const resUser = await axios.get('https://notesappmodules.herokuapp.com/api/users');
         this.setState({ dbUsers: resUser.data });
         console.log(resUser.data);
     }
@@ -35,7 +35,7 @@ export default class CreateUser extends Component {
     
     onSubmit = async (event) => {
         event.preventDefault();
-        const resUser = await axios.post('http://localhost:5000/api/users', {
+        const resUser = await axios.post('https://notesappmodules.herokuapp.com/api/users', {
             userName: this.state.userName,
             name: this.state.name,
             lastName: this.state.lastName,
@@ -55,7 +55,7 @@ export default class CreateUser extends Component {
 
     onDeleteUser = async (userId) =>{        
         console.log(userId);
-        await axios.delete('http://localhost:5000/api/users/' + userId);
+        await axios.delete('https://notesappmodules.herokuapp.com/api/users/' + userId);
         this.getUsers();
     }
 
