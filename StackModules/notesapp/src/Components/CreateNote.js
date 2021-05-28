@@ -24,7 +24,7 @@ export default class CreateNote extends Component {
     }
 
     getUsers = async () => {
-        const restUser = await axios.get('https://notesappmodules.herokuapp.com/api/users');
+        const restUser = await axios.get(process.env.URL_NOTES_LOCAL);
         console.log('db user create note');
         console.log(restUser.data);        
         if (restUser.data.length > 0) {
@@ -51,7 +51,7 @@ export default class CreateNote extends Component {
 
     onSubmit = async (event) => {
         event.preventDefault();
-        const restNotes = await axios.post('https://notesappmodules.herokuapp.com/api/notes', {
+        const restNotes = await axios.post(process.env.URL_NOTES_LOCAL, {
             title: this.state.title,
             content: this.state.content,
             author: this.state.userSelected,
